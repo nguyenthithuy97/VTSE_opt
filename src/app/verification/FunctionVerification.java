@@ -73,11 +73,8 @@ public class FunctionVerification {
 		// add user's assertion
 		constraintTemp = userInput.createUserAssertion(postCondition);
 		constraintTemp = "(not " + constraintTemp + ")";
-		constraints.add(constraintTemp);
-		
+		constraints.add(constraintTemp);		
 		smtInput.setConstrainst(constraints);
-		
-		long end = System.currentTimeMillis();
 		
 		String functionName = cfg.getNameFunction();
 		String path = SMTINPUT_DIR + functionName + ".smt";
@@ -86,7 +83,7 @@ public class FunctionVerification {
 	    
 	    List<String> result = Z3Runner.runZ3(path);
 	    
-	    
+	    long end = System.currentTimeMillis();
 	    //result.forEach(System.out::println);
 	    Report report = new Report();
 	    report.setListParameter(cfg.getInitVariables());
@@ -104,10 +101,12 @@ public class FunctionVerification {
 		long begin = System.currentTimeMillis();
 		
 		VtseCFG cfg = new VtseCFG(function, ast);
-		cfg.unfold(nLoops);
+//		System.out.println("before unfold " + cfg.getVm().getTotalEmplement());
+		cfg.unfold(nLoops);	
+//		System.out.println("after unfold " + cfg.getVm().getTotalEmplement() + " " + cfg.getVm().getSize());
 		cfg.index();		
-		
-//	 cfg.printGraph();
+//		System.out.print(cfg.getVm().getTotalEmplement());
+//		cfg.printGraph();
 		// cfg.printMeta();
 		// cfg.printFormular(System.out);
 		
@@ -126,8 +125,7 @@ public class FunctionVerification {
 			constraintTemp = userInput.createUserAssertion(preCondition, cfg.getNameFunction());
 			constraints.add(constraintTemp);
 			//System.err.println(constraintTemp);
-		}
-		
+		}		
 		
 		// add user's assertion
 		constraintTemp = userInput.createUserAssertion(postCondition,cfg.getNameFunction());
@@ -136,19 +134,14 @@ public class FunctionVerification {
 		constraints.add(constraintTemp);
 		
 		smtInput.setConstrainst(constraints);
-		
 		long end = System.currentTimeMillis();
-		
 		String functionName = cfg.getNameFunction();		
 		String path = SMTINPUT_DIR + functionName + ".smt";
-		
-		//System.err.println("    0.o   " + path);
-		
-		
+	
 		FileOutputStream fo = new FileOutputStream(new File(path));
 	    smtInput.printInputToOutputStream(fo);
 	    
-	    List<String> result = Z3Runner.runZ3(path);
+	    List<String> result = Z3Runner.runZ3(path);	    
 	    
 	    Report report = new Report();
 	    report.setListParameter(cfg.getInitVariables());
@@ -162,14 +155,13 @@ public class FunctionVerification {
 //	    }
 	    verReport.setSizeVariable(cfg.getVm().getSize());
 	    verReport.setNumberOfTotalVariable(cfg.getVm().getTotalEmplement());
-	    verReport.print();
-	    //result.forEach(System.out::println);
-	    
 	    verReport.setFunctionName(cfg.getNameFunction());
 	    verReport.setGenerateConstraintTime((int)(end-begin));
 	    verReport.setPreCondition(preCondition);
 	    verReport.setPostCondition(postCondition);
-		
+	    System.err.println("constrain" + verReport.getGenerateConstraintTime());
+		System.err.println("solver" + verReport.getSolverTime());
+		verReport.print();
 		return verReport;
 	}
 }

@@ -245,7 +245,7 @@ void do_read_c()
   }
   DR_ENTRY: 
   {
-  //while (1 < 2)
+  while (1 < 2)
   {
     while_1_continue: /* CIL Label */ ;
     c_dr_st = 2;
@@ -485,7 +485,7 @@ void eval()
   int __NONDET;
   {
   {
-  //while (1 < 2)
+  while (1 < 2)
   {
     while_2_continue: /* CIL Label */ ;
     {
@@ -608,7 +608,7 @@ void start_simulation()
   reset_delta_events();
   }
   {
-  //while (1 < 2)
+  while (1 < 2)
   {
     while_3_continue: /* CIL Label */ ;
     {

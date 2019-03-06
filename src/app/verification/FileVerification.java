@@ -102,8 +102,11 @@ public class FileVerification {
 			int nLoops;
 			if (am.getLoopCount() != null) {
 				nLoops = Integer.parseInt(am.getLoopCount());
+//				nLoops = 5;
+//				System.err.println("LOOP = " + nLoops);
 			} else {
 				nLoops = 1;
+//				System.err.println("LOOP_null = " + nLoops);
 			}
 			for (IASTFunctionDefinition function: listFunction) {
 				String functionName = getFunctionName(function);
@@ -117,6 +120,7 @@ public class FileVerification {
 							reportList.add(report);
 						}
 						long end = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+						
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

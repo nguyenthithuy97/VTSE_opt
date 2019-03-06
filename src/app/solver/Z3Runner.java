@@ -21,7 +21,7 @@ public class Z3Runner {
         //System.err.println(filename);
 		if(System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
             try {
-            	Process p = Runtime.getRuntime().exec("/usr/local/bin/z3 -smt2 -st -T:300 " + filename);
+            	Process p = Runtime.getRuntime().exec("/usr/local/bin/z3 -smt2 -st -T:1500 " + filename);
              
                 BufferedReader br = new BufferedReader( new InputStreamReader(p.getInputStream()));
                     while ((s = br.readLine()) != null)
@@ -45,7 +45,7 @@ public class Z3Runner {
         
         else if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
             try {
-            	Process p = Runtime.getRuntime().exec("z3 -smt2 -st -T:1 " + filename);
+            	Process p = Runtime.getRuntime().exec("z3 -smt2 -st -T:1500 " + filename);
              
                 BufferedReader br = new BufferedReader( new InputStreamReader(p.getInputStream()));
                     while ((s = br.readLine()) != null)
@@ -70,7 +70,7 @@ public class Z3Runner {
         else {
 //    		List<String> result = new ArrayList<String>();
     		String pathToZ3 = "z3\\bin\\z3.exe";
-    		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", pathToZ3 + " -smt2 -st -T:1 " + filename);
+    		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", pathToZ3 + " -smt2 -st -T:1500 " + filename);
     		builder.redirectErrorStream(true);
     		Process p = builder.start();
     		//System.err.println("p: " + p);
