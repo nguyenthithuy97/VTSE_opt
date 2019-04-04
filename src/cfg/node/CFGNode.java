@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import cfg.build.index.VariableManager;
 
 public abstract class CFGNode {	
+	protected ArrayList<CFGNode> previous;
 	protected CFGNode next;	
 	private boolean vistited;
+	private ArrayList<int[]> level;
+	private boolean flag;
 	public CFGNode(){		
 	}
 	
@@ -23,7 +26,22 @@ public abstract class CFGNode {
 	public void setNext(CFGNode next) {
 		this.next = next;
 	}
-
+	
+	public ArrayList<CFGNode> getPrevious(){
+		return this.previous;
+	}
+	
+	public void setPrevious(ArrayList<CFGNode> previous){
+		this.previous = previous;
+	}
+	
+	public void addPrevious(CFGNode node){
+		if (this.previous == null){
+			this.previous = new ArrayList<>();
+		}
+		this.previous.add(node);
+	}
+	
 	public ArrayList<CFGNode> adjacent() {
 		ArrayList<CFGNode> adj = new ArrayList<>();
 		adj.add(next);

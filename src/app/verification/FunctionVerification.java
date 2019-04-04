@@ -102,7 +102,9 @@ public class FunctionVerification {
 		
 		VtseCFG cfg = new VtseCFG(function, ast);
 //		System.out.println("before unfold " + cfg.getVm().getTotalEmplement());
+		
 		cfg.unfold(nLoops);	
+		
 //		System.out.println("after unfold " + cfg.getVm().getTotalEmplement() + " " + cfg.getVm().getSize());
 		cfg.index();		
 //		System.out.print(cfg.getVm().getTotalEmplement());

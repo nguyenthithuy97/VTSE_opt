@@ -10,12 +10,13 @@ import cfg.build.ASTFactory;
 
 public class TestFunction {
 	public static void main(String[] args) {
-		ASTFactory ast = new ASTFactory("./TestInput.c");
+//		ASTFactory ast = new ASTFactory("./TestInput.c");
+		ASTFactory ast = new ASTFactory("./benchmark/kratos/mainopt.c");
 		IASTFunctionDefinition function = ast.getFunction(0);
 		
 		FunctionVerification functionVerification = new FunctionVerification();
 		try {
-			VerificationReport report = functionVerification.verify(ast, function, "", "", 3);
+			VerificationReport report = functionVerification.verify(ast, function, "", "", 50);
 			System.out.println(report.getCounterEx());
 		} catch (IOException e) {
 			e.printStackTrace();
