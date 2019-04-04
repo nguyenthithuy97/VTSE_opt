@@ -9,7 +9,7 @@ public abstract class CFGNode {
 	protected ArrayList<CFGNode> previous;
 	protected CFGNode next;	
 	private boolean vistited;
-	private ArrayList<int[]> level;
+	private ArrayList<Integer> level = new ArrayList<>();
 	private boolean flag;
 	public CFGNode(){		
 	}
@@ -74,6 +74,22 @@ public abstract class CFGNode {
 	}
 	public void setVistited(boolean vistited) {
 		this.vistited = vistited;
+	}
+
+	public ArrayList<Integer> getLevel() {
+		return level;
+	}
+
+	public void setLevel(ArrayList<Integer> level) {
+		this.level = level;
+	}
+
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
 	}
 
 }

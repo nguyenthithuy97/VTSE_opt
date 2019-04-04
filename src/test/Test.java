@@ -20,18 +20,21 @@ public class Test {
 	static String EXAMPLE = "./benchmark/example";
 	
 	public static void  main(String[] args) throws FileNotFoundException {
-//		ASTFactory ast = new ASTFactory(KRATOS + "/bist_cell.c");
+//		ASTFactory ast = new ASTFactory(KRATOS + "/token_ring.10.c");
 //		ASTFactory ast = new ASTFactory(FLOAT_CDFPL + "./newton_1_1_true_unreach_call.c");
-		ASTFactory ast = new ASTFactory(EXAMPLE + "/example_5.c");
+		ASTFactory ast = new ASTFactory(EXAMPLE + "/example_4.c");
 		
 		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
 		ShortcutCFG cfgopt = new ShortcutCFG(cfg);
-		cfgopt.fillPreviousNode(cfg.getStart());
+//		cfg.unfold();
+		cfgopt.fillPreviousNode(cfg.getStart(), 0);
 		cfgopt.scanCFG(cfg.getExit());
 		cfgopt.checkFillPrevious(cfg.getStart(), 0);
+		
+		
 //		ast.print();
 		//cfg.printBoundary();
-//		cfg.unfold();	
+			
 //		cfg.index();
 //		cfg.printGraph();
 //		cfg.printMeta();
